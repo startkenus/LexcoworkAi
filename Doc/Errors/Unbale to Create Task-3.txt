@@ -1,0 +1,114 @@
+The deferred DOM Node could not be resolved to a valid node.Understand this warning
+content.js:1971 Failed to initialize current tab: TypeError: Cannot read properties of undefined (reading 'query')
+    at content.js:6:64659
+    at new Promise (<anonymous>)
+    at Ei (content.js:6:64631)
+    at ER.initializeCurrentTab (content.js:1971:18770)
+    at new ER (content.js:1971:18654)
+    at content.js:1971:20491
+    at content.js:4857:14378
+initializeCurrentTab @ content.js:1971
+await in initializeCurrentTab
+ER @ content.js:1971
+(anonymous) @ content.js:1971
+(anonymous) @ content.js:4857Understand this error
+content.js:6967 Failed to initialize current tab: TypeError: Cannot read properties of undefined (reading 'query')
+    at content.js:4933:64409
+    at new Promise (<anonymous>)
+    at sn (content.js:4933:64381)
+    at Qf.initializeCurrentTab (content.js:6967:18770)
+    at new Qf (content.js:6967:18654)
+    at content.js:6967:20491
+    at content.js:9588:164
+initializeCurrentTab @ content.js:6967
+await in initializeCurrentTab
+Qf @ content.js:6967
+(anonymous) @ content.js:6967
+(anonymous) @ content.js:9588Understand this error
+main-app.js?v=1770763709795:1565 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+app-index.js:32 Warning: Extra attributes from the server: cz-shortcut-listen
+    at body
+    at html
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/redirect-boundary.js:72:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/redirect-boundary.js:80:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/not-found-boundary.js:54:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/not-found-boundary.js:62:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/dev-root-not-found-boundary.js:32:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/react-dev-overlay/internal/ReactDevOverlay.js:66:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/react-dev-overlay/hot-reloader-client.js:287:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/app-router.js:157:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/error-boundary.js:82:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/error-boundary.js:110:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/components/app-router.js:440:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/app-index.js:123:11)
+    at RSCComponent
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/.pnpm/next@13.5.1_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/client/app-index.js:139:11)
+window.console.error @ app-index.js:32
+console.error @ hydration-error-info.js:41
+printWarning @ react-dom.development.js:94
+error @ react-dom.development.js:68
+warnForExtraAttributes @ react-dom.development.js:31255
+diffHydratedProperties @ react-dom.development.js:33475
+hydrateInstance @ react-dom.development.js:34427
+prepareToHydrateHostInstance @ react-dom.development.js:6975
+completeWork @ react-dom.development.js:18621
+completeUnitOfWork @ react-dom.development.js:24759
+performUnitOfWork @ react-dom.development.js:24564
+workLoopConcurrent @ react-dom.development.js:24539
+renderRootConcurrent @ react-dom.development.js:24495
+performConcurrentWorkOnRoot @ react-dom.development.js:23359
+workLoop @ scheduler.development.js:261
+flushWork @ scheduler.development.js:230
+performWorkUntilDeadline @ scheduler.development.js:534Understand this error
+index.mjs:157  POST https://uonziowbfkqanjmuzccb.supabase.co/rest/v1/audit_logs 403 (Forbidden)
+eval @ index.mjs:157
+eval @ index.mjs:171
+await in eval
+then @ index.mjs:95Understand this error
+task-executor.ts:140 Calling orchestrator with token: Token present
+task-executor.ts:142  POST https://uonziowbfkqanjmuzccb.supabase.co/functions/v1/orchestrator 401 (Unauthorized)
+executeTask @ task-executor.ts:142
+await in executeTask
+createTask @ task-executor.ts:92
+await in createTask
+handleSubmit @ task-creator.tsx:216
+callCallback @ react-dom.development.js:19462
+invokeGuardedCallbackImpl @ react-dom.development.js:19511
+invokeGuardedCallback @ react-dom.development.js:19586
+invokeGuardedCallbackAndCatchFirstError @ react-dom.development.js:19600
+executeDispatch @ react-dom.development.js:30652
+processDispatchQueueItemsInOrder @ react-dom.development.js:30684
+processDispatchQueue @ react-dom.development.js:30697
+dispatchEventsForPlugins @ react-dom.development.js:30708
+eval @ react-dom.development.js:30898
+batchedUpdates$1 @ react-dom.development.js:23767
+batchedUpdates @ react-dom.development.js:27614
+dispatchEventForPluginEventSystem @ react-dom.development.js:30897
+dispatchEvent @ react-dom.development.js:28670
+dispatchDiscreteEvent @ react-dom.development.js:28641Understand this error
+task-executor.ts:164 Orchestrator error response: {"code":401,"message":"Invalid JWT"}
+window.console.error @ app-index.js:32
+console.error @ hydration-error-info.js:41
+executeTask @ task-executor.ts:164
+await in executeTask
+createTask @ task-executor.ts:92
+await in createTask
+handleSubmit @ task-creator.tsx:216
+callCallback @ react-dom.development.js:19462
+invokeGuardedCallbackImpl @ react-dom.development.js:19511
+invokeGuardedCallback @ react-dom.development.js:19586
+invokeGuardedCallbackAndCatchFirstError @ react-dom.development.js:19600
+executeDispatch @ react-dom.development.js:30652
+processDispatchQueueItemsInOrder @ react-dom.development.js:30684
+processDispatchQueue @ react-dom.development.js:30697
+dispatchEventsForPlugins @ react-dom.development.js:30708
+eval @ react-dom.development.js:30898
+batchedUpdates$1 @ react-dom.development.js:23767
+batchedUpdates @ react-dom.development.js:27614
+dispatchEventForPluginEventSystem @ react-dom.development.js:30897
+dispatchEvent @ react-dom.development.js:28670
+dispatchDiscreteEvent @ react-dom.development.js:28641Understand this error
+task-executor.ts:176 Task execution error: Error: Orchestrator failed: {"code":401,"message":"Invalid JWT"}
+    at executeTask (task-executor.ts:165:13)
+    at async createTask (task-executor.ts:92:7)
+    at async handleSubmit (task-creator.tsx:216:22)
