@@ -63,11 +63,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       if (!isMounted) return;
       
-      // Set loading for both initial session and sign in to prevent flickering
-      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
-        setLoading(true);
-      }
-      
       setUser(session?.user ?? null);
       
       if (session?.user) {

@@ -25,9 +25,10 @@ export default function Home() {
     if (!loading && user && !hasRedirected.current) {
       hasRedirected.current = true;
       console.log('Home: Redirecting to dashboard...');
-      router.replace('/dashboard');
+      // Use window.location for a hard redirect to avoid React re-render loops
+      window.location.href = '/dashboard';
     }
-  }, [user, loading, router]);
+  }, [user, loading]);
 
   if (!mounted || loading) {
     return (

@@ -16,9 +16,10 @@ export default function LoginPage() {
     if (!loading && user && !hasRedirected.current) {
       hasRedirected.current = true;
       console.log('Redirecting to dashboard...');
-      router.replace('/dashboard');
+      // Use window.location for a hard redirect to avoid React re-render loops
+      window.location.href = '/dashboard';
     }
-  }, [user, loading, router]);
+  }, [user, loading]);
 
   // Show loading state while checking authentication
   if (loading) {
