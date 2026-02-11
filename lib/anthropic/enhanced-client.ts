@@ -4,6 +4,7 @@
  */
 
 import Anthropic from '@anthropic-ai/sdk';
+import type { Message, TextBlockParam } from '@anthropic-ai/sdk/resources';
 
 export interface AnthropicClientConfig {
   apiKey: string;
@@ -16,7 +17,7 @@ export interface MessageParams {
   model?: string;
   max_tokens?: number;
   temperature?: number;
-  system?: string | Array<{ type: string; text: string; cache_control?: { type: string } }>;
+  system?: string | Array<TextBlockParam>;
   messages: Array<{ role: 'user' | 'assistant'; content: string }>;
 }
 
@@ -61,15 +62,16 @@ export class AnthropicClient {
 
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
       try {
-        // Add timeout
+        // Add timeout and ensure non-streaming response
         const response = await this.withTimeout(
           this.client.messages.create({
             model,
             max_tokens: maxTokens,
             temperature,
-            system: params.system,
+            system: params.system as string | Array<TextBlockParam> | undefined,
             messages: params.messages as any,
-          }),
+            stream: false, // Explicitly set non-streaming
+          }) as Promise<Message>,
           this.timeout
         );
 
@@ -131,11 +133,11 @@ export class AnthropicClient {
     }
 
     // Enable prompt caching for system prompt
-    const system: any = [
+    const system: Array<TextBlockParam> = [
       {
-        type: 'text',
+        type: 'text' as const,
         text: systemPrompt,
-        cache_control: { type: 'ephemeral' },
+        cache_control: { type: 'ephemeral' as const },
       },
     ];
 
