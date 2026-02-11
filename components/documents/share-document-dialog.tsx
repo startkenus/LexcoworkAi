@@ -82,7 +82,7 @@ export function ShareDocumentDialog({
         <DialogHeader>
           <DialogTitle>Share Document</DialogTitle>
           <DialogDescription>
-            Share "{task.title}" with others by email or link.
+            Share &quot;{task.title}&quot; with others by email or link.
           </DialogDescription>
         </DialogHeader>
 

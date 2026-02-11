@@ -654,7 +654,7 @@ export default function DashboardPage() {
               <div className="space-y-2">
                 <p className="text-sm font-medium">Review a contract against your playbook</p>
                 <p className="text-xs text-muted-foreground">
-                  Upload a contract and LexCowork will analyze it against your jurisdiction's requirements and company playbook
+                  Upload a contract and LexCowork will analyze it against your jurisdiction&apos;s requirements and company playbook
                 </p>
               </div>
               <div className="space-y-2">
@@ -676,7 +676,7 @@ export default function DashboardPage() {
                 </p>
               </div>
               <div className="pt-4 text-sm text-muted-foreground">
-                Click "+ New Task" above or select an AI Worker to get started
+                Click &quot;+ New Task&quot; above or select an AI Worker to get started
               </div>
             </CardContent>
           </Card>

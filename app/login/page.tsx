@@ -63,7 +63,7 @@ export default function LoginPage() {
       <LoginForm />
       <div className="mt-6 text-center text-xs text-muted-foreground max-w-md">
         <p>
-          New here? Click "Sign up" to create an account. The first user becomes a super admin.
+          New here? Click &quot;Sign up&quot; to create an account. The first user becomes a super admin.
         </p>
       </div>
     </div>

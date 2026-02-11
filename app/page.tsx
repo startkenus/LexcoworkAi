@@ -313,7 +313,7 @@ export default function Home() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-200">"No source = no claim" enforcement</span>
+                    <span className="text-gray-200">&quot;No source = no claim&quot; enforcement</span>
                   </li>
                 </ul>
               </CardContent>
@@ -381,8 +381,8 @@ export default function Home() {
               <CardContent>
                 <p className="text-gray-300 mb-2">Every action is logged:</p>
                 <ul className="text-sm text-gray-300 space-y-1">
-                  <li>• Inputs & sources</li>
-                  <li>• Drafts & approvals</li>
+                  <li>• Inputs &amp; sources</li>
+                  <li>• Drafts &amp; approvals</li>
                   <li>• Final outputs</li>
                 </ul>
                 <p className="text-sm font-medium text-white mt-2">Enterprise-ready from day one.</p>

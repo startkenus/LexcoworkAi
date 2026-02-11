@@ -96,7 +96,7 @@ export function EditDocumentDialog({
         <DialogHeader>
           <DialogTitle>Edit Document</DialogTitle>
           <DialogDescription>
-            Make changes to your document. Click save when you're done.
+            Make changes to your document. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
 

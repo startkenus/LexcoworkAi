@@ -131,7 +131,7 @@ export function LoginForm() {
               </p>
             ) : (
               <p>
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <button
                   type="button"
                   onClick={() => setIsSignUp(true)}
