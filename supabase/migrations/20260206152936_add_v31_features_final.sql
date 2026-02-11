@@ -170,6 +170,7 @@ ALTER TABLE response_templates ENABLE ROW LEVEL SECURITY;
 ALTER TABLE command_history ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies for risk_assessments
+DROP POLICY IF EXISTS "Users can view risk assessments in their tenant" ON risk_assessments;
 CREATE POLICY "Users can view risk assessments in their tenant"
   ON risk_assessments FOR SELECT
   TO authenticated
@@ -187,6 +188,7 @@ CREATE POLICY "Users can view risk assessments in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can create risk assessments" ON risk_assessments;
 CREATE POLICY "Users can create risk assessments"
   ON risk_assessments FOR INSERT
   TO authenticated
@@ -198,6 +200,7 @@ CREATE POLICY "Users can create risk assessments"
     )
   );
 
+DROP POLICY IF EXISTS "Users can update their own risk assessments" ON risk_assessments;
 CREATE POLICY "Users can update their own risk assessments"
   ON risk_assessments FOR UPDATE
   TO authenticated
@@ -217,6 +220,7 @@ CREATE POLICY "Users can update their own risk assessments"
   );
 
 -- RLS Policies for vendors
+DROP POLICY IF EXISTS "Users can view vendors in their tenant" ON vendors;
 CREATE POLICY "Users can view vendors in their tenant"
   ON vendors FOR SELECT
   TO authenticated
@@ -228,6 +232,7 @@ CREATE POLICY "Users can view vendors in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can create vendors in their tenant" ON vendors;
 CREATE POLICY "Users can create vendors in their tenant"
   ON vendors FOR INSERT
   TO authenticated
@@ -239,6 +244,7 @@ CREATE POLICY "Users can create vendors in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can update vendors in their tenant" ON vendors;
 CREATE POLICY "Users can update vendors in their tenant"
   ON vendors FOR UPDATE
   TO authenticated
@@ -258,6 +264,7 @@ CREATE POLICY "Users can update vendors in their tenant"
   );
 
 -- RLS Policies for vendor_agreements
+DROP POLICY IF EXISTS "Users can view vendor agreements in their tenant" ON vendor_agreements;
 CREATE POLICY "Users can view vendor agreements in their tenant"
   ON vendor_agreements FOR SELECT
   TO authenticated
@@ -270,6 +277,7 @@ CREATE POLICY "Users can view vendor agreements in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can create vendor agreements in their tenant" ON vendor_agreements;
 CREATE POLICY "Users can create vendor agreements in their tenant"
   ON vendor_agreements FOR INSERT
   TO authenticated
@@ -282,6 +290,7 @@ CREATE POLICY "Users can create vendor agreements in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can update vendor agreements in their tenant" ON vendor_agreements;
 CREATE POLICY "Users can update vendor agreements in their tenant"
   ON vendor_agreements FOR UPDATE
   TO authenticated
@@ -303,6 +312,7 @@ CREATE POLICY "Users can update vendor agreements in their tenant"
   );
 
 -- RLS Policies for vendor_key_terms
+DROP POLICY IF EXISTS "Users can view vendor key terms in their tenant" ON vendor_key_terms;
 CREATE POLICY "Users can view vendor key terms in their tenant"
   ON vendor_key_terms FOR SELECT
   TO authenticated
@@ -316,6 +326,7 @@ CREATE POLICY "Users can view vendor key terms in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can create vendor key terms" ON vendor_key_terms;
 CREATE POLICY "Users can create vendor key terms"
   ON vendor_key_terms FOR INSERT
   TO authenticated
@@ -330,6 +341,7 @@ CREATE POLICY "Users can create vendor key terms"
   );
 
 -- RLS Policies for briefings
+DROP POLICY IF EXISTS "Users can view their own briefings" ON briefings;
 CREATE POLICY "Users can view their own briefings"
   ON briefings FOR SELECT
   TO authenticated
@@ -347,6 +359,7 @@ CREATE POLICY "Users can view their own briefings"
     )
   );
 
+DROP POLICY IF EXISTS "Users can create briefings in their tenant" ON briefings;
 CREATE POLICY "Users can create briefings in their tenant"
   ON briefings FOR INSERT
   TO authenticated
@@ -359,6 +372,7 @@ CREATE POLICY "Users can create briefings in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can update their own briefings" ON briefings;
 CREATE POLICY "Users can update their own briefings"
   ON briefings FOR UPDATE
   TO authenticated
@@ -377,6 +391,7 @@ CREATE POLICY "Users can update their own briefings"
     )
   );
 
+DROP POLICY IF EXISTS "Users can delete their own briefings" ON briefings;
 CREATE POLICY "Users can delete their own briefings"
   ON briefings FOR DELETE
   TO authenticated
@@ -389,6 +404,7 @@ CREATE POLICY "Users can delete their own briefings"
   );
 
 -- RLS Policies for response_templates
+DROP POLICY IF EXISTS "Users can view approved templates in their tenant" ON response_templates;
 CREATE POLICY "Users can view approved templates in their tenant"
   ON response_templates FOR SELECT
   TO authenticated
@@ -408,6 +424,7 @@ CREATE POLICY "Users can view approved templates in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Users can create templates in their tenant" ON response_templates;
 CREATE POLICY "Users can create templates in their tenant"
   ON response_templates FOR INSERT
   TO authenticated
@@ -420,6 +437,7 @@ CREATE POLICY "Users can create templates in their tenant"
     )
   );
 
+DROP POLICY IF EXISTS "Admins can update templates in their tenant" ON response_templates;
 CREATE POLICY "Admins can update templates in their tenant"
   ON response_templates FOR UPDATE
   TO authenticated
@@ -447,6 +465,7 @@ CREATE POLICY "Admins can update templates in their tenant"
   );
 
 -- RLS Policies for command_history
+DROP POLICY IF EXISTS "Users can view their own command history" ON command_history;
 CREATE POLICY "Users can view their own command history"
   ON command_history FOR SELECT
   TO authenticated
@@ -464,6 +483,7 @@ CREATE POLICY "Users can view their own command history"
     )
   );
 
+DROP POLICY IF EXISTS "Users can create command history" ON command_history;
 CREATE POLICY "Users can create command history"
   ON command_history FOR INSERT
   TO authenticated
