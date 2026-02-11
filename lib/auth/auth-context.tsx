@@ -23,10 +23,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+    
     const initAuth = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (!isMounted) return;
+        
+        if (error) {
+          console.error('Session error:', error);
+          setUser(null);
+          setLoading(false);
+          return;
+        }
+        
         setUser(session?.user ?? null);
+        
         if (session?.user) {
           await loadProfile(session.user.id);
         } else {
@@ -34,7 +47,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (error) {
         console.error('Init auth error:', error);
-        setLoading(false);
+        if (isMounted) {
+          setUser(null);
+          setLoading(false);
+        }
       }
     };
 
@@ -45,9 +61,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('Auth state changed:', event);
       
-      // Only show loading during initial sign in, not on every state change
-      const shouldShowLoading = event === 'SIGNED_IN' || event === 'INITIAL_SESSION';
-      if (shouldShowLoading) {
+      if (!isMounted) return;
+      
+      // Only show loading during initial sign in
+      if (event === 'SIGNED_IN') {
         setLoading(true);
       }
       
@@ -57,13 +74,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await loadProfile(session.user.id);
       } else {
         setProfile(null);
-        if (event === 'SIGNED_OUT') {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const loadProfile = async (userId: string) => {
@@ -74,10 +92,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .eq('user_id', userId)
         .maybeSingle();
 
-      if (error) throw error;
-      setProfile(data);
+      if (error) {
+        console.error('Error loading profile:', error);
+        // Set loading to false even on error so page doesn't hang
+        setProfile(null);
+      } else {
+        setProfile(data);
+      }
     } catch (error) {
       console.error('Error loading profile:', error);
+      setProfile(null);
     } finally {
       setLoading(false);
     }
