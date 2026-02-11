@@ -19,7 +19,7 @@ DROP INDEX IF EXISTS public.idx_citations_source_id_fk;
 DROP INDEX IF EXISTS public.idx_citations_task_step_id_fk;
 DROP INDEX IF EXISTS public.idx_command_history_tenant_id_fk;
 DROP INDEX IF EXISTS public.idx_document_versions_created_by_fk;
-DROP INDEX IF EXISTS public.idx_documents_created_by_fk;
+DROP INDEX IF EXISTS public.idx_documents_uploaded_by_fk;
 DROP INDEX IF EXISTS public.idx_rag_chunks_tenant_id_fk;
 DROP INDEX IF EXISTS public.idx_rag_sources_approved_by_fk;
 DROP INDEX IF EXISTS public.idx_rag_sources_uploaded_by_fk;

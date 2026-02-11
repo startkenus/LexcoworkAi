@@ -17,7 +17,7 @@ CREATE INDEX IF NOT EXISTS idx_citations_source_id ON public.citations(source_id
 CREATE INDEX IF NOT EXISTS idx_citations_task_step_id ON public.citations(task_step_id);
 CREATE INDEX IF NOT EXISTS idx_command_history_tenant_id ON public.command_history(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_document_versions_created_by ON public.document_versions(created_by);
-CREATE INDEX IF NOT EXISTS idx_documents_created_by ON public.documents(created_by);
+CREATE INDEX IF NOT EXISTS idx_documents_uploaded_by ON public.documents(uploaded_by);
 CREATE INDEX IF NOT EXISTS idx_rag_chunks_tenant_id ON public.rag_chunks(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_rag_sources_approved_by ON public.rag_sources(approved_by);
 CREATE INDEX IF NOT EXISTS idx_rag_sources_uploaded_by ON public.rag_sources(uploaded_by);

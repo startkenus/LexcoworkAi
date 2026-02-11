@@ -7,17 +7,10 @@
 -- Project ID: idgfbmvfqyirgdowsxrm
 -- SQL Editor: https://app.supabase.com/project/idgfbmvfqyirgdowsxrm/sql/new
 -- 
--- Generated: 2026-02-11T21:02:12.017Z
+-- Generated: 2026-02-11T21:19:20.845Z
 -- Total Migrations: 17
 -- ============================================
 
-
--- ============================================
--- EXTENSIONS
--- ============================================
-
--- Enable vector extension for RAG embeddings
-CREATE EXTENSION IF NOT EXISTS vector;
 
 -- ============================================
 -- Migration 1/17: 000_create_base_schema.sql
@@ -42,6 +35,13 @@ CREATE EXTENSION IF NOT EXISTS vector;
   - RLS enabled on all tables
   - Tenant-scoped policies ensure data isolation
 */
+
+-- ============================================
+-- EXTENSIONS
+-- ============================================
+
+-- Enable vector extension for RAG embeddings
+CREATE EXTENSION IF NOT EXISTS vector;
 
 -- ============================================
 -- PROFILES TABLE (Must be created FIRST)
@@ -1720,7 +1720,7 @@ CREATE INDEX IF NOT EXISTS idx_citations_source_id ON public.citations(source_id
 CREATE INDEX IF NOT EXISTS idx_citations_task_step_id ON public.citations(task_step_id);
 CREATE INDEX IF NOT EXISTS idx_command_history_tenant_id ON public.command_history(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_document_versions_created_by ON public.document_versions(created_by);
-CREATE INDEX IF NOT EXISTS idx_documents_created_by ON public.documents(created_by);
+CREATE INDEX IF NOT EXISTS idx_documents_uploaded_by ON public.documents(uploaded_by);
 CREATE INDEX IF NOT EXISTS idx_rag_chunks_tenant_id ON public.rag_chunks(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_rag_sources_approved_by ON public.rag_sources(approved_by);
 CREATE INDEX IF NOT EXISTS idx_rag_sources_uploaded_by ON public.rag_sources(uploaded_by);
@@ -2303,7 +2303,7 @@ DROP INDEX IF EXISTS public.idx_citations_source_id_fk;
 DROP INDEX IF EXISTS public.idx_citations_task_step_id_fk;
 DROP INDEX IF EXISTS public.idx_command_history_tenant_id_fk;
 DROP INDEX IF EXISTS public.idx_document_versions_created_by_fk;
-DROP INDEX IF EXISTS public.idx_documents_created_by_fk;
+DROP INDEX IF EXISTS public.idx_documents_uploaded_by_fk;
 DROP INDEX IF EXISTS public.idx_rag_chunks_tenant_id_fk;
 DROP INDEX IF EXISTS public.idx_rag_sources_approved_by_fk;
 DROP INDEX IF EXISTS public.idx_rag_sources_uploaded_by_fk;
