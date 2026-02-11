@@ -45,8 +45,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log('Auth state changed:', event);
       
-      // Set loading to true during state transitions
-      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+      // Only show loading during initial sign in, not on every state change
+      const shouldShowLoading = event === 'SIGNED_IN' || event === 'INITIAL_SESSION';
+      if (shouldShowLoading) {
         setLoading(true);
       }
       
@@ -56,7 +57,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await loadProfile(session.user.id);
       } else {
         setProfile(null);
-        setLoading(false);
+        if (event === 'SIGNED_OUT') {
+          setLoading(false);
+        }
       }
     });
 

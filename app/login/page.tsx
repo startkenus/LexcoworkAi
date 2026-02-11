@@ -11,14 +11,10 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Only redirect if we're not loading and user is authenticated
+    // Redirect immediately when user is authenticated and loading is complete
     if (!loading && user) {
-      // Small delay to ensure auth state is fully settled
-      const timeoutId = setTimeout(() => {
-        router.push('/dashboard');
-      }, 100);
-      
-      return () => clearTimeout(timeoutId);
+      // Use replace instead of push to prevent back button issues
+      router.replace('/dashboard');
     }
   }, [user, loading, router]);
 
