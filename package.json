@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "fixtypescriptbug": "node scripts/fixtypescriptbug.js",
+    "fixtypescriptbug:watch": "tsc --noEmit --watch",
+    "fixtypescriptbug:quick": "tsc --noEmit --pretty",
+    "check": "pnpm run typecheck && pnpm run lint"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.73.0",

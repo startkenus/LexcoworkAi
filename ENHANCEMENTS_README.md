@@ -496,7 +496,7 @@ console.assert(result.ai_disclosure.includes('Anthropic'));
 ```bash
 # Anthropic API
 ANTHROPIC_API_KEY=sk-ant-...                    # Commercial API key
-NEXT_PUBLIC_ANTHROPIC_API_KEY=sk-ant-...       # For client-side (if needed)
+ANTHROPIC_API_KEY=sk-ant-...                   # Server-side only (secure)
 
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=https://...

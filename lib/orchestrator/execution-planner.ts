@@ -12,7 +12,7 @@ import {
 } from '@/types/orchestration';
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY || '',
+  apiKey: process.env.ANTHROPIC_API_KEY || '',
 });
 
 const ORCHESTRATOR_SYSTEM_PROMPT = `You are an AI orchestration planner for LexCoworkAI, a legal productivity platform.

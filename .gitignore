@@ -34,3 +34,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# typescript error reports
+/reports
+
+# temp files
+_tmp_*
+
+# sensitive files
+*Login Info.txt
+desktop.ini

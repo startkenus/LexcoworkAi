@@ -239,8 +239,7 @@ let clientInstance: AnthropicClient | null = null;
 
 export function getAnthropicClient(): AnthropicClient {
   if (!clientInstance) {
-    const apiKey =
-      process.env.ANTHROPIC_API_KEY || process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY || '';
+    const apiKey = process.env.ANTHROPIC_API_KEY || '';
 
     if (!apiKey) {
       throw new Error('ANTHROPIC_API_KEY not configured');

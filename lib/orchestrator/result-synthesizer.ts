@@ -13,7 +13,7 @@ import {
 import { generateAIDisclosure, containsAdviceLanguage } from '../anthropic/compliance';
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY || '',
+  apiKey: process.env.ANTHROPIC_API_KEY || '',
 });
 
 const SYNTHESIZER_SYSTEM_PROMPT = `You are a result synthesizer for LexCoworkAI. Your role is to combine outputs from multiple specialized legal AI workers into a coherent, user-friendly final report.
