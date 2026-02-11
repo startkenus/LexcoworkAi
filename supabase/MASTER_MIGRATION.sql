@@ -7,7 +7,7 @@
 -- Project ID: idgfbmvfqyirgdowsxrm
 -- SQL Editor: https://app.supabase.com/project/idgfbmvfqyirgdowsxrm/sql/new
 -- 
--- Generated: 2026-02-11T20:42:35.410Z
+-- Generated: 2026-02-11T20:46:14.321Z
 -- Total Migrations: 17
 -- ============================================
 
@@ -76,6 +76,37 @@ CREATE INDEX IF NOT EXISTS idx_profiles_user_id ON public.profiles(user_id);
 CREATE INDEX IF NOT EXISTS idx_profiles_tenant_id ON public.profiles(tenant_id);
 
 -- ============================================
+-- ENUMS
+-- ============================================
+
+-- Task status enum
+DO $$ BEGIN
+  CREATE TYPE task_status AS ENUM (
+    'pending',
+    'in_progress',
+    'completed',
+    'cancelled',
+    'error',
+    'failed'
+  );
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+-- Task step status enum
+DO $$ BEGIN
+  CREATE TYPE step_status AS ENUM (
+    'pending',
+    'in_progress',
+    'completed',
+    'failed',
+    'skipped'
+  );
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+-- ============================================
 -- TENANTS TABLE
 -- ============================================
 CREATE TABLE IF NOT EXISTS public.tenants (
@@ -124,7 +155,7 @@ CREATE TABLE IF NOT EXISTS public.tasks (
   created_by UUID REFERENCES auth.users(id) ON DELETE SET NULL,
   title TEXT NOT NULL,
   description TEXT,
-  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'in_progress', 'completed', 'cancelled', 'error')),
+  status task_status NOT NULL DEFAULT 'pending',
   jurisdiction JSONB DEFAULT '{}'::jsonb,
   input_data JSONB DEFAULT '{}'::jsonb,
   output_data JSONB DEFAULT '{}'::jsonb,
@@ -193,7 +224,7 @@ CREATE TABLE IF NOT EXISTS public.task_steps (
   task_id UUID REFERENCES public.tasks(id) ON DELETE CASCADE NOT NULL,
   step_number INTEGER NOT NULL,
   worker_id TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'in_progress', 'completed', 'failed', 'skipped')),
+  status step_status NOT NULL DEFAULT 'pending',
   input_data JSONB DEFAULT '{}'::jsonb,
   output_data JSONB DEFAULT '{}'::jsonb,
   error_message TEXT,
@@ -1393,27 +1424,35 @@ COMMENT ON COLUMN tasks.deliverable_type IS 'Specific deliverable type (e.g., nd
     - No security changes needed
 */
 
--- Add FAILED to task_status enum
+-- Add FAILED to task_status enum (check if enum type exists first)
 DO $$ 
 BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM pg_enum 
-    WHERE enumlabel = 'FAILED' 
-    AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'task_status')
-  ) THEN
-    ALTER TYPE task_status ADD VALUE 'FAILED';
+  -- Check if task_status enum type exists
+  IF EXISTS (SELECT 1 FROM pg_type WHERE typname = 'task_status') THEN
+    -- Check if FAILED value already exists
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_enum 
+      WHERE enumlabel = 'FAILED' 
+      AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'task_status')
+    ) THEN
+      ALTER TYPE task_status ADD VALUE 'FAILED';
+    END IF;
   END IF;
 END $$;
 
--- Add FAILED to step_status enum
+-- Add FAILED to step_status enum (check if enum type exists first)
 DO $$ 
 BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM pg_enum 
-    WHERE enumlabel = 'FAILED' 
-    AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'step_status')
-  ) THEN
-    ALTER TYPE step_status ADD VALUE 'FAILED';
+  -- Check if step_status enum type exists
+  IF EXISTS (SELECT 1 FROM pg_type WHERE typname = 'step_status') THEN
+    -- Check if FAILED value already exists
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_enum 
+      WHERE enumlabel = 'FAILED' 
+      AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'step_status')
+    ) THEN
+      ALTER TYPE step_status ADD VALUE 'FAILED';
+    END IF;
   END IF;
 END $$;
 

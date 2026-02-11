@@ -58,6 +58,37 @@ CREATE INDEX IF NOT EXISTS idx_profiles_user_id ON public.profiles(user_id);
 CREATE INDEX IF NOT EXISTS idx_profiles_tenant_id ON public.profiles(tenant_id);
 
 -- ============================================
+-- ENUMS
+-- ============================================
+
+-- Task status enum
+DO $$ BEGIN
+  CREATE TYPE task_status AS ENUM (
+    'pending',
+    'in_progress',
+    'completed',
+    'cancelled',
+    'error',
+    'failed'
+  );
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+-- Task step status enum
+DO $$ BEGIN
+  CREATE TYPE step_status AS ENUM (
+    'pending',
+    'in_progress',
+    'completed',
+    'failed',
+    'skipped'
+  );
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+-- ============================================
 -- TENANTS TABLE
 -- ============================================
 CREATE TABLE IF NOT EXISTS public.tenants (
@@ -106,7 +137,7 @@ CREATE TABLE IF NOT EXISTS public.tasks (
   created_by UUID REFERENCES auth.users(id) ON DELETE SET NULL,
   title TEXT NOT NULL,
   description TEXT,
-  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'in_progress', 'completed', 'cancelled', 'error')),
+  status task_status NOT NULL DEFAULT 'pending',
   jurisdiction JSONB DEFAULT '{}'::jsonb,
   input_data JSONB DEFAULT '{}'::jsonb,
   output_data JSONB DEFAULT '{}'::jsonb,
@@ -175,7 +206,7 @@ CREATE TABLE IF NOT EXISTS public.task_steps (
   task_id UUID REFERENCES public.tasks(id) ON DELETE CASCADE NOT NULL,
   step_number INTEGER NOT NULL,
   worker_id TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'in_progress', 'completed', 'failed', 'skipped')),
+  status step_status NOT NULL DEFAULT 'pending',
   input_data JSONB DEFAULT '{}'::jsonb,
   output_data JSONB DEFAULT '{}'::jsonb,
   error_message TEXT,
