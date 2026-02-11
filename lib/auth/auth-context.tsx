@@ -63,17 +63,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       if (!isMounted) return;
       
-      // Prevent loading state from blocking on every event
-      // Only show loading for initial session, not subsequent changes
-      if (event === 'INITIAL_SESSION') {
+      // Set loading for both initial session and sign in to prevent flickering
+      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
         setLoading(true);
       }
       
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        // Don't show loading if we already have a profile
-        // This prevents the flickering on subsequent auth events
+        // Load profile and set loading to false when done
         await loadProfile(session.user.id);
       } else {
         setProfile(null);
