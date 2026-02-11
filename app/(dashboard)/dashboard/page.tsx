@@ -29,7 +29,7 @@ import {
 } from '@/components/ui/alert-dialog';
 
 export default function DashboardPage() {
-  const { profile, loading: authLoading } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -47,10 +47,11 @@ export default function DashboardPage() {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !profile) {
+    // Check for user authentication instead of profile (profile may not exist yet)
+    if (!authLoading && !user) {
       router.push('/login');
     }
-  }, [authLoading, profile, router]);
+  }, [authLoading, user, router]);
 
   useEffect(() => {
     if (profile?.tenant_id) {
