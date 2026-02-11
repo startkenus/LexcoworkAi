@@ -29,20 +29,23 @@ export function LoginForm() {
     try {
       if (isSignUp) {
         await signUp(email, password, fullName || undefined);
-        setSuccess('Account created successfully! Signing you in...');
-        setTimeout(async () => {
-          await signIn(email, password);
-          router.push('/dashboard');
-        }, 1500);
+        setSuccess('Account created successfully! Please sign in.');
+        setLoading(false);
+        // Switch to sign-in mode
+        setTimeout(() => {
+          setIsSignUp(false);
+          setSuccess('');
+        }, 2000);
       } else {
         await signIn(email, password);
-        router.push('/dashboard');
+        // Don't manually redirect - let the login page's useEffect handle it
+        // This prevents double redirects and flickering
       }
     } catch (err: any) {
       setError(err.message || `Failed to ${isSignUp ? 'sign up' : 'sign in'}`);
-    } finally {
       setLoading(false);
     }
+    // Note: Don't set loading to false for sign-in - let the page handle redirect
   };
 
   return (

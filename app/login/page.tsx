@@ -11,15 +11,37 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (user && !loading) {
-      router.push('/dashboard');
+    // Only redirect if we're not loading and user is authenticated
+    if (!loading && user) {
+      // Small delay to ensure auth state is fully settled
+      const timeoutId = setTimeout(() => {
+        router.push('/dashboard');
+      }, 100);
+      
+      return () => clearTimeout(timeoutId);
     }
   }, [user, loading, router]);
 
+  // Show loading state while checking authentication
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-muted-foreground">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render login form if user is authenticated (prevents flash)
+  if (user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Redirecting...</p>
+        </div>
       </div>
     );
   }
