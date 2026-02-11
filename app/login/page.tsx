@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { LoginForm } from '@/components/auth/login-form';
 import { useAuth } from '@/lib/auth/auth-context';
@@ -9,11 +9,13 @@ import Image from 'next/image';
 export default function LoginPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
-    // Redirect immediately when user is authenticated and loading is complete
-    if (!loading && user) {
-      // Use replace instead of push to prevent back button issues
+    // Redirect only once when user is authenticated
+    if (!loading && user && !hasRedirected.current) {
+      hasRedirected.current = true;
+      console.log('Redirecting to dashboard...');
       router.replace('/dashboard');
     }
   }, [user, loading, router]);

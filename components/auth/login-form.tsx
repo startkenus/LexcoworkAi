@@ -38,14 +38,14 @@ export function LoginForm() {
         }, 2000);
       } else {
         await signIn(email, password);
-        // Don't manually redirect - let the login page's useEffect handle it
-        // This prevents double redirects and flickering
+        console.log('Sign in successful, waiting for redirect...');
+        // Don't set loading to false - let auth context and page handle it
       }
     } catch (err: any) {
+      console.error('Sign in error:', err);
       setError(err.message || `Failed to ${isSignUp ? 'sign up' : 'sign in'}`);
       setLoading(false);
     }
-    // Note: Don't set loading to false for sign-in - let the page handle redirect
   };
 
   return (

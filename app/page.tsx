@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth/auth-context';
 import Image from 'next/image';
@@ -14,13 +14,17 @@ export default function Home() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!loading && user) {
+    // Redirect only once when user is authenticated
+    if (!loading && user && !hasRedirected.current) {
+      hasRedirected.current = true;
+      console.log('Home: Redirecting to dashboard...');
       router.replace('/dashboard');
     }
   }, [user, loading, router]);

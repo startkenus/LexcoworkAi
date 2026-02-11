@@ -59,18 +59,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth state changed:', event);
+      console.log('Auth state changed:', event, session?.user?.id);
       
       if (!isMounted) return;
       
-      // Only show loading during initial sign in
-      if (event === 'SIGNED_IN') {
+      // Prevent loading state from blocking on every event
+      // Only show loading for initial session, not subsequent changes
+      if (event === 'INITIAL_SESSION') {
         setLoading(true);
       }
       
       setUser(session?.user ?? null);
       
       if (session?.user) {
+        // Don't show loading if we already have a profile
+        // This prevents the flickering on subsequent auth events
         await loadProfile(session.user.id);
       } else {
         setProfile(null);
@@ -93,16 +96,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .maybeSingle();
 
       if (error) {
-        console.error('Error loading profile:', error);
-        // Set loading to false even on error so page doesn't hang
+        console.warn('Profile not found or RLS blocking access:', error.message);
+        // Allow user to proceed even without profile
+        // This prevents infinite redirect loops
         setProfile(null);
       } else {
         setProfile(data);
       }
     } catch (error) {
       console.error('Error loading profile:', error);
+      // Always allow user to proceed
       setProfile(null);
     } finally {
+      // CRITICAL: Always set loading to false
       setLoading(false);
     }
   };
